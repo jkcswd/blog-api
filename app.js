@@ -2,6 +2,9 @@ const createError = require('http-errors');
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 const userRouter = require('./routes/user');
 const postRouter = require('./routes/user');
@@ -10,14 +13,14 @@ const commentRouter = require('./routes/user');
 const app = express();
 
 const mongoose = require('mongoose');
-const mongoDB = 'insert_your_database_url_here';
+const mongoDB = process.env.MONGO_STRING;
 mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true});
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use('/api/user', userRouter);
@@ -26,7 +29,7 @@ app.use('/api/comment', commentRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+  res.status(404).json({ message: "Route not found" });
 });
 
 // error handler
@@ -37,7 +40,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.status(404).json({ message: `error: ${err.message}` });
 });
 
 module.exports = app;
