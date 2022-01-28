@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const bcrypt = require('bcryptjs');
 
 exports.allUsersGet = (req, res, next) => {
   User.find().exec((err, data) => {
@@ -16,19 +17,23 @@ exports.oneUserGet = (req, res, next) => {
 }
 
 exports.createNewUser = (req, res, next) => {
-  new User(
-    {
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      username: req.body.username,
-      password: req.body.password,
-      email: req.body.email,
-      isAdmin: req.body.isAdmin,
-    }
-  ).save(err => {
-    if (err) { return next(err); }
+  bcrypt.hash(req.body.password, 10, (err, hashedPassword) =>{
+    if(err) { return next(err); }
 
-    res.send({"message":`User Saved: ${req.body.username}`})
+    new User(
+      {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        username: req.body.username,
+        password: hashedPassword,
+        email: req.body.email,
+        isAdmin: req.body.isAdmin,
+      }
+    ).save(err => {
+      if (err) { return next(err); }
+  
+      res.send({"message":`User Saved: ${req.body.username}`})
+    });
   });
 }
 
