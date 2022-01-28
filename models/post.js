@@ -14,4 +14,4 @@ PostSchema.virtual('url').get(function() {
   return '/api/post/' + this._id;
 });
 
-const Post = mongoose.model('Post', PostSchema );
+module.exports = mongoose.model('Post', PostSchema );
