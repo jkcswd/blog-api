@@ -3,9 +3,10 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const dotenv = require('dotenv');
-const passport = require('./passport')
+const passport = require("passport");
 
 dotenv.config();
+require('./passport');
 
 const userRouter = require('./routes/user');
 const postRouter = require('./routes/post');
@@ -25,9 +26,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.use('/api/user', userRouter);
-app.use('/api/post', postRouter);
-app.use('/api/comment', commentRouter);
+app.use('/api/user', passport.authenticate('jwt', {session: false}), userRouter);
+app.use('/api/post', passport.authenticate('jwt', {session: false}), postRouter);
+app.use('/api/comment', passport.authenticate('jwt', {session: false}), commentRouter);
 app.use('/api/auth', authRouter);
 
 // catch 404 and forward to error handler
