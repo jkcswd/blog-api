@@ -12,9 +12,15 @@ router.post('/', (req, res, next) => {
         return res.send(err);
       }
 
-      const token = jwt.sign(user.toJSON(), process.env.JWT );
+      if(user) {
+        const token = jwt.sign(user.toJSON(), process.env.JWT );
       
-      return res.json({user, token});
+        return res.json({user, token});
+      }else {
+        return res.send({Message:"Something went wrong"})
+      }
+
+
     });
   })(req, res);
 });
