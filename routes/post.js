@@ -5,10 +5,11 @@ const postController = require('../controllers/postController');
 
 require('../passport');
 
-router.get('/', postController.allPostsGet );
+router.get('/', postController.allPostsGet);
 router.post('/', passport.authenticate('jwt', {session: false}), postController.createNewPost);
-router.get('/:id', postController.onePostGet );
+router.get('/:id', postController.onePostGet);
 router.patch('/:id', passport.authenticate('jwt', {session: false}), postController.updatePost);
 router.delete('/:id', passport.authenticate('jwt', {session: false}), postController.deletePost);
+router.get('/:id/comments', postController.getCommentsForPost);
 
 module.exports = router;
