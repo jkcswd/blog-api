@@ -1,7 +1,8 @@
+const Comment = require('../models/comment');
 const Post = require('../models/post');
 
 exports.allPostsGet = (req, res, next) => {
-  Post.find().exec((err, data) => {
+  Post.find().populate('user').exec((err, data) => {
     if (err) { return next(err); }
 
     res.send(data)
@@ -44,5 +45,13 @@ exports.deletePost = (req, res, next) => {
     if (err) { return next(err); }
 
     res.send({"message": `Deleted Post: ${req.params.id}`})
+  });
+}
+
+exports.getCommentsForPost = (req, res, next) => {
+  Comment.find({ post: req.params.id }).populate('user').exec((err, comments) => {
+    if (err) { return next(err); }
+
+    res.send(comments);
   });
 }
