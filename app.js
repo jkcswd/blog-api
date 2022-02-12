@@ -16,18 +16,6 @@ const authRouter = require('./routes/auth');
 
 const app = express();
 
-// IP access control 
-app.use((req, res, next) => {
-  const ipArray = process.env.ALLOWED_IPS.split(' ');
-
-  if (ipArray.includes(req.ip)) {
-    res.status(401);
-    return res.send({ message: 'Permission denied' });
-  }
-
-  next();
-})
-
 const mongoose = require('mongoose');
 const mongoDB = process.env.MONGO_STRING;
 mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true});
