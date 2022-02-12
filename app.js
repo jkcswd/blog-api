@@ -5,6 +5,8 @@ const logger = require('morgan');
 const dotenv = require('dotenv');
 const passport = require("passport");
 const cors = require('cors');
+const compression = require('compression');
+const helmet = require('helmet');
 
 dotenv.config();
 require('./passport');
@@ -22,6 +24,8 @@ mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true});
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
+app.use(helmet());
+app.use(compression());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
