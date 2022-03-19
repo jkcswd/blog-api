@@ -22,7 +22,7 @@ A blog built using the MERN Stack using a RESTful API.
 (explain design)
 
 ## Database Schema Diagram
-![Screenshot](#)
+![Screenshot](https://github.com/jkcswd/blog-api/blob/main/README/schema.png?raw=true)
 
 ## API
 (explain API structure)
