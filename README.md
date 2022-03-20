@@ -7,7 +7,11 @@ A blog built using the MERN Stack using a RESTful API.
 - [Access the github page for the CMS front end here.](https://github.com/jkcswd/blog-api-cms)
 
 ## Demo
-(create gif of app being used)
+### User Front-End 
+![User Demo](https://github.com/jkcswd/blog-api/blob/main/README/Demo-user.gif)
+
+### CMS Front-End
+![CMS Demo](https://github.com/jkcswd/blog-api/blob/main/README/Demo-cms.gif)
 
 ## Tech
 - Express
@@ -23,9 +27,6 @@ A blog built using the MERN Stack using a RESTful API.
 
 ## Database Schema Diagram
 ![Screenshot](https://github.com/jkcswd/blog-api/blob/main/README/schema.png?raw=true)
-
-## API
-(explain API structure)
 
 ## Reflections
 
