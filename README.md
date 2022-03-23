@@ -21,7 +21,7 @@ A blog built using the MERN Stack using a RESTful API.
 
 ## Functionality 
 - User front-end:
-  - Will show all blog posts.
+  - Show all blog posts.
   - Users will have the ability to post comments on each post.
 - CMS front-end:
   - Show all posts published and unpublished.
@@ -30,10 +30,9 @@ A blog built using the MERN Stack using a RESTful API.
   - Create new posts.
 - Back-end:
   - JSON web-token authentication.
-  - RESTful API to connect to front-ends.
 
 ## Design
-(explain design)
+- Two React front-ends connect to a RESTful API back-end built using Express with a MongoDB NoSQL database.
 
 ## Database Schema Diagram
 ![Screenshot](https://github.com/jkcswd/blog-api/blob/main/README/schema.png?raw=true)
